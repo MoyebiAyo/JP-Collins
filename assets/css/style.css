@@ -1032,6 +1032,26 @@ p { color: var(--text-muted); }
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .footer-brand img { height: 52px; margin-bottom: 1.2rem; }
+.footer-brand .motto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--gold-400);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+.footer-brand .motto::before,
+.footer-brand .motto::after {
+  content: "";
+  width: 20px; height: 1.5px;
+  background: var(--gold-500);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
 .footer-brand p { color: rgba(224, 240, 255,0.7); font-size: 0.92rem; max-width: 320px; }
 .footer-col h5 {
   font-family: var(--font-body);
