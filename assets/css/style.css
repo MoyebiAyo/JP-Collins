@@ -606,6 +606,41 @@ p { color: var(--text-muted); }
 .gallery-item.tall { grid-row: span 2; }
 .gallery-item.wide { grid-column: span 2; }
 
+/* Additional uniform gallery grid */
+.gallery-grid-extra {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.8rem;
+}
+.gallery-grid-extra .ge {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  margin: 0;
+}
+.gallery-grid-extra .ge img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.gallery-grid-extra .ge:hover img { transform: scale(1.08); }
+.gallery-grid-extra .ge .zoom-ico {
+  position: absolute; top: 50%; left: 50%;
+  width: 42px; height: 42px;
+  transform: translate(-50%, -50%) scale(0.5);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  color: var(--white);
+  display: grid; place-items: center;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.gallery-grid-extra .ge:hover .zoom-ico { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
 /* Masonry-ish featured gallery (home uses a curated layout) */
 .gallery-featured {
   display: grid;
@@ -1118,12 +1153,14 @@ p { color: var(--text-muted); }
   .gallery-featured .gi-wide   { grid-column: span 2; grid-row: span 1; }
   .gallery-featured .gi-tall   { grid-column: span 2; grid-row: span 2; }
   .gallery-featured .gi-banner { grid-column: span 4; grid-row: span 1; }
+  .gallery-grid-extra { grid-template-columns: repeat(4, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: span 2; }
 }
 @media (max-width: 720px) {
   body { font-size: 16px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .gallery-grid-extra { grid-template-columns: repeat(3, 1fr); }
   /* Mobile: clean 2-col grid, no tall tiles, everything equal */
   .gallery-featured { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; gap: 0.8rem; }
   .gallery-featured .gi-hero,
@@ -1151,6 +1188,7 @@ p { color: var(--text-muted); }
   .gallery-featured .gi-tall,
   .gallery-featured .gi-banner { grid-column: span 1; grid-row: span 1; }
   .gallery-featured .gi-hero { grid-row: span 1; }
+  .gallery-grid-extra { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: 1fr; }
 }
 
