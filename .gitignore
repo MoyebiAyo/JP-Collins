@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Build / temp
+output/
+.playwright-cli/
+.playwright/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vercel
+.vercel
