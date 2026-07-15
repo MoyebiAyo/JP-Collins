@@ -154,6 +154,45 @@ p { color: var(--text-muted); }
 .bg-green h1, .bg-green h2, .bg-green h3, .bg-green h4 { color: var(--white); }
 .bg-green p { color: rgba(224, 240, 255, 0.78); }
 
+/* ----------  Statement / Manifesto banner  ---------- */
+.statement-banner {
+  position: relative;
+  background: var(--green-900);
+  background-image:
+    radial-gradient(800px 400px at 85% 20%, rgba(84, 191, 64, 0.14), transparent 60%),
+    radial-gradient(600px 400px at 10% 90%, rgba(5, 146, 236, 0.16), transparent 60%);
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+  overflow: hidden;
+}
+.statement-banner::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.statement-banner .container { position: relative; z-index: 1; }
+.statement-banner blockquote {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.statement-banner blockquote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.8vw, 2.6rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.statement-banner blockquote p:last-child { margin-top: 0.6rem; }
+.statement-banner blockquote em {
+  font-style: italic;
+  background: linear-gradient(120deg, var(--gold-400), var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .grid { display: grid; gap: var(--space-6); }
 /* Responsive column utilities — collapse to 1 col on mobile via media queries */
 .cols-2 { grid-template-columns: repeat(2, 1fr); }
