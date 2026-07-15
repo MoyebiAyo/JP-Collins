@@ -437,10 +437,7 @@ p { color: var(--text-muted); }
 .hero h1 .accent {
   font-style: italic;
   font-weight: 500;
-  background: linear-gradient(120deg, var(--gold-300), var(--gold-500));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold-400);
 }
 .hero-sub { max-width: 540px; color: rgba(224, 240, 255, 0.85); font-size: 1.15rem; margin-bottom: 2.2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
