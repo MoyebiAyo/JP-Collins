@@ -83,17 +83,39 @@
   /* ----------  Contact form (demo handler)  ---------- */
   const form = document.querySelector("#contact-form");
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = form.querySelector("[type=submit]");
       const original = btn.textContent;
       btn.textContent = "Sending…";
       btn.disabled = true;
-      setTimeout(() => {
-        form.reset();
-        btn.textContent = "Message sent ✓";
-        setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 2600);
-      }, 1200);
+
+      const data = {
+        firstName: form.firstName?.value || "",
+        lastName: form.lastName?.value || "",
+        email: form.email?.value || "",
+        phone: form.phone?.value || "",
+        interest: form.interest?.value || "",
+        message: form.message?.value || "",
+      };
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json();
+        if (result.ok) {
+          form.reset();
+          btn.textContent = "Message sent ✓";
+        } else {
+          btn.textContent = "Failed — try again";
+        }
+      } catch (err) {
+        btn.textContent = "Failed — try again";
+      }
+      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 3000);
     });
   }
 
