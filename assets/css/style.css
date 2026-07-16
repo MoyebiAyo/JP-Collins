@@ -818,6 +818,14 @@ p { color: var(--text-muted); }
 .marquee-track .partner:hover { filter: grayscale(0) opacity(1); }
 @keyframes scrollX { to { transform: translateX(-50%); } }
 
+/* Reverse marquee — scrolls right */
+.marquee-reverse .marquee-track { animation: scrollXReverse 38s linear infinite; }
+.marquee-reverse:hover .marquee-track { animation-play-state: paused; }
+@keyframes scrollXReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
 /* ----------  CTA band  ---------- */
 .cta-band {
   position: relative;
