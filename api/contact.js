@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const ADMIN_EMAIL = 'admin@jpcolins.com';
+const FROM_EMAIL = 'JPCollins <noreply@jpcolins.com>';
 
 export default async function handler(req, res) {
   // Only accept POST
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
 
     // 1. Email to admin@jpcolins.com
     await resend.emails.send({
-      from: 'JPCollins Website <onboarding@resend.dev>',
+      from: FROM_EMAIL,
       to: [ADMIN_EMAIL],
       replyTo: email,
       subject: `New Contact Form Submission — ${fullName}`,
@@ -54,7 +55,7 @@ export default async function handler(req, res) {
 
     // 2. Confirmation email to the person who filled the form
     await resend.emails.send({
-      from: 'JPCollins <onboarding@resend.dev>',
+      from: FROM_EMAIL,
       to: [email],
       subject: 'We received your message — JPCollins',
       html: `
