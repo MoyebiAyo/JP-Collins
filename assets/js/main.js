@@ -138,22 +138,33 @@
   /* ----------  Click-to-play video embeds  ---------- */
   document.querySelectorAll(".thumb[data-video]").forEach((thumb) => {
     thumb.addEventListener("click", () => {
-      if (thumb.querySelector("iframe")) return; // already playing
+      if (thumb.querySelector("iframe") || thumb.querySelector("video")) return; // already playing
       const id = thumb.dataset.video;
       const source = thumb.dataset.source;
-      const iframe = document.createElement("iframe");
-      iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.setAttribute("title", thumb.querySelector("img")?.alt || "Video");
-      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-      if (source === "youtube") {
-        // Use nocookie domain + proper param set to avoid Error 153
-        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
-      } else if (source === "drive") {
-        iframe.src = "https://drive.google.com/file/d/" + id + "/preview";
+      if (source === "local") {
+        // Native HTML5 video player
+        var video = document.createElement("video");
+        video.src = id;
+        video.controls = true;
+        video.autoplay = true;
+        video.setAttribute("playsinline", "");
+        video.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;";
+        thumb.innerHTML = "";
+        thumb.appendChild(video);
+      } else {
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("title", thumb.querySelector("img")?.alt || "Video");
+        iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+        if (source === "youtube") {
+          iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+        } else if (source === "drive") {
+          iframe.src = "https://drive.google.com/file/d/" + id + "/preview";
+        }
+        thumb.innerHTML = "";
+        thumb.appendChild(iframe);
       }
-      thumb.innerHTML = "";
-      thumb.appendChild(iframe);
     });
   });
 
